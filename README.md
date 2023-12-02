@@ -9,6 +9,7 @@ I do not recommend you copy the exact answer, since it is different for everyone
 ## Progress
 
 - [x] Day 1
+- [x] Day 2
 
 ## License
 
