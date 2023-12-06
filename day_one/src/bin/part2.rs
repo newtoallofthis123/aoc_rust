@@ -29,7 +29,7 @@ fn get_word(word: String)->i32{
             results.push(c);
         }
 
-        // println!("temp_word: {}", temp_word);
+        println!("temp_word: {}", temp_word);
         
         for w in words.iter(){
             if temp_word.contains(w){

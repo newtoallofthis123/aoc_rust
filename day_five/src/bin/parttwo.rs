@@ -59,10 +59,11 @@ fn get_range(map: Vec<Vec<i64>>, range: (i64, i64)) -> (i64, i64) {
         if diff < min && entry[1] < start+till{
             min = diff;
             min_entry = entry.clone();
-        } else if entry[1] > start+till {
-            min = diff;
-            min_entry = entry.clone();
-        }
+        } 
+        // else if entry[1] > start+till {
+        //     min = diff;
+        //     min_entry = entry.clone();
+        // }
     }
 
     println!("{:?}", (&min, &min_entry));
