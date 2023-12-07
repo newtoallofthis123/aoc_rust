@@ -1,5 +1,5 @@
 fn main() {
-    let input = include_str!("input")
+    let input = include_str!("temp")
         .lines()
         .map(|x| x.to_string())
         .collect::<Vec<String>>();
@@ -9,6 +9,7 @@ fn main() {
         .filter(|x| is_numeric(x))
         .map(|x| x.parse::<i32>().unwrap())
         .collect::<Vec<i32>>();
+
     let distances = input[1]
         .split(' ')
         .filter(|x| is_numeric(x))

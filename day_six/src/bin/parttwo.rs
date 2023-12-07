@@ -16,7 +16,7 @@ fn main() {
         .lines()
         .map(|x| x.to_string())
         .collect::<Vec<String>>();
-
+    
     let times = input[0]
         .chars()
         .filter(|x| x.is_numeric())
@@ -51,6 +51,7 @@ fn get_winning(pair: (i64, i64)) -> i64 {
         .unwrap()
         .to_owned()
         .ceil() as i64;
+
     let mut max_number = res
         .iter()
         .max_by(|x, y| x.partial_cmp(y).unwrap())

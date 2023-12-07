@@ -14,6 +14,7 @@ I do not recommend you copy the exact answer, since it is different for everyone
 - [x] Day 4
 - [ ] Day 5
 - [x] Day 6
+- [x] Day 7
 
 ## License
 
