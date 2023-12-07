@@ -1,5 +1,7 @@
 # Advent of code in Rust
 
+[![wakatime](https://wakatime.com/badge/user/7bd238cb-c7ea-4e56-abe2-0b6ae36ff252/project/018c2435-779f-4e29-9b28-21c87f443d79.svg)](https://wakatime.com/badge/user/7bd238cb-c7ea-4e56-abe2-0b6ae36ff252/project/018c2435-779f-4e29-9b28-21c87f443d79)
+
 Well, this is my first time doing Advent of Code, let alone doing it in Rust. But I'm excited to learn more about the language and hopefully get better at it.
 
 ## Running
