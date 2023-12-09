@@ -18,6 +18,7 @@ I do not recommend you copy the exact answer, since it is different for everyone
 - [x] Day 6
 - [x] Day 7
 - [x] Day 8
+- [x] Day 9
 
 ## License
 
