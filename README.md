@@ -8,6 +8,10 @@ Well, this is my first time doing Advent of Code, let alone doing it in Rust. Bu
 
 I do not recommend you copy the exact answer, since it is different for everyone. But if you want to run it, you can do so by first cd'ing into the directory of the day you want to run, and then running `cargo run --bin part1` or `cargo run --bin part2` depending on which part you want to run.
 
+## Honesty
+
+The whole point of Advent of Code is to learn and get better at programming. So I will be honest about my progress and how I did it. If I did use a reference or copied the answer, I will say so. There is no point in lying about it.
+
 ## Progress
 
 - [x] Day 1
@@ -20,9 +24,21 @@ I do not recommend you copy the exact answer, since it is different for everyone
 - [x] Day 8
 - [x] Day 9
 - [ ] Day 10
-- [ ] Day 11 (I)
+- [x] Day 11
 - [ ] Day 12
 - [x] Day 13
+
+## Was able to solve with reference
+
+These are usually problems for which I was able to solve part 1, but not part 2. So I had to look at the answer to part 2, realize my mistake, and then solve it.
+
+- [x] Day 13 (Part 2)
+
+## Understood and Copied the answer
+
+These are problems that I copied off another answer, but I took the time to understand it and learn from it.
+
+- [x] Day 11 (Part 2)
 
 ## License
 

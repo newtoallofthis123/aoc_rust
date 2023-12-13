@@ -1,110 +1,103 @@
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-enum Entity {
-    Space,
-    Galaxy,
+// Used and understood answer by
+// https://github.com/bastuijnman/adventofcode/blob/master/2023/11-12/src/main.rs
+
+use std::{fs::read_to_string, env, cmp};
+
+///
+/// Calculate the sum of shortest paths given the contents of the input
+/// and the dark energy constant.
+/// 
+fn calculate (contents: String, dark_energy: usize) -> i64 {
+
+    // Grab line length and map out characters into vec
+    let line_len = contents.lines().next().unwrap().trim().len();
+    let map:Vec<char> = contents.replace('\n', "").chars().collect();
+
+    // Find the rows that should be expanding due to empty space
+    let expanding_rows: Vec<usize> = (0..(map.len() / line_len)).filter(|row| {
+        let mut is_empty = true;
+        for col in 0..line_len {
+            if map[col + (row * line_len)] == '#' {
+                is_empty = false;
+                break;
+            }
+        }
+        is_empty
+    }).collect();
+
+    // Find the cols that should be expanding due to empty space
+    let expanding_cols: Vec<usize> = (0..line_len).filter(|col| {
+        let mut is_empty = true;
+        for row in 0..(map.len() / line_len) {
+            if map[col + (row * line_len)] == '#' {
+                is_empty = false;
+                break;
+            }
+        }
+        is_empty
+    }).collect();
+
+    // Find all galaxies and map them out in X/Y coordinates
+    let galaxies: Vec<(i64, i64)> = map
+        .iter()
+        .enumerate()
+        .map(|(idx, c)| (idx % line_len, idx / line_len, *c))
+        .filter(|(_x, _y, c)| *c == '#')
+        .map(|(x, y, _c)| (x as i64, y as i64))
+        .collect();
+    
+    // Hold a reference to the sum of the shorted paths
+    let mut paths_sum = 0;
+
+    // Loop through all possible galaxy pairs
+    for i in 0..(galaxies.len() - 1) {
+        for j in (i+1)..galaxies.len() {
+
+            // Find shortest horizontal between galaxy pair
+            let horizontal_distance = (galaxies[j].0 - galaxies[i].0).abs();
+
+            // Calculate the additional space due to expansion
+            let horizontal_expansion_impacted = expanding_cols
+                .iter()
+                .filter(|n| {
+                    let min = cmp::min(galaxies[i].0, galaxies[j].0);
+                    let max = cmp::max(galaxies[i].0, galaxies[j].0);
+                    
+                    (min..max).contains(&(**n as i64))
+                })
+                .count() as i64 * dark_energy as i64;
+
+            // Find the shortest vertical path between galaxy pair
+            let vertical_distance = (galaxies[j].1 - galaxies[i].1).abs();
+
+            // Calculate the additional space due to expansion
+            let vertical_expansion_impacted = expanding_rows
+                .iter()
+                .filter(|n| {
+                    let min = cmp::min(galaxies[i].1, galaxies[j].1);
+                    let max = cmp::max(galaxies[i].1, galaxies[j].1);
+                    
+                    (min..max).contains(&(**n as i64))
+                })
+                .count() as i64 * dark_energy as i64;
+            
+            // Add all path components & add to sum
+            paths_sum += horizontal_distance + horizontal_expansion_impacted + vertical_distance + vertical_expansion_impacted;
+        }
+    }
+
+    // Return sum
+    paths_sum
 }
 
 fn main() {
-    let input = include_str!("temp")
-        .lines()
-        .map(|l| {
-            l.chars()
-                .map(|c| match c {
-                    '.' => Entity::Space,
-                    '#' => Entity::Galaxy,
-                    _ => panic!("Unknown entity"),
-                })
-                .collect::<Vec<_>>()
-        })
-        .collect::<Vec<_>>();
 
-    let grid = return_full_input(input);
-
-    // find galaxy positions
-    let galaxy_positions = grid
-        .iter()
-        .enumerate()
-        .flat_map(|(i, row)| {
-            row.iter()
-                .enumerate()
-                .filter(|(_j, col)| col == &&Entity::Galaxy)
-                .map(|(j, _col)| (i, j))
-                .collect::<Vec<_>>()
-        })
-        .collect::<Vec<_>>();
-
-    println!("{:?}", galaxy_positions);
-
-    let mut distances = Vec::new();
-
-    for (i, j) in galaxy_positions.clone() {
-        let mut distance = Vec::new();
-        for (k, l) in galaxy_positions.iter() {
-            distance.push((i as i32 - *k as i32).abs() + (j as i32 - *l as i32).abs());
-        }
-        distances.push(distance);
-    }
-
-    println!("{:?}", distances);
-
-    let mut total = 0;
-
-    distances.iter().for_each(|d| {
-        total += d.iter().sum::<i32>();
-    });
-
-    println!("{}", total/2);
-}
-
-fn return_full_input(input:Vec<Vec<Entity>>) -> Vec<Vec<Entity>>{
-    let mut input = input;
-
-    let empty_rows = input
-        .iter()
-        .enumerate()
-        .filter(|(_i, row)| {
-            row.iter()
-                .enumerate()
-                .all(|(_j, col)| col == &Entity::Space)
-        })
-        .map(|(i, _row)| i)
-        .collect::<Vec<_>>();
-
-    let mut empty_cols = Vec::new();
-
-    for j in 0..input[0].len() {
-        let mut is_empty = true;
-        (0..input.len()).for_each(|i| {
-            if input[i][j] != Entity::Space {
-                is_empty = false;
-            }
-        });
-        if is_empty {
-            empty_cols.push(j);
-        }
-    }
-
-    let empty_row = input[empty_rows[0]].clone();
-
-    // each duplicate row makes 10 rows
-    let mut x = 0;
-    empty_rows.iter().for_each(|i| {
-        (0..(10-1)).for_each(|_j| {
-            input.insert(*i + x, empty_row.clone());
-            x += 1;
-        });
-    });
-
-    // each duplicate col makes 10 cols
-    x = 0;
-    empty_cols.iter().for_each(|j| {
-        (0..(10-1)).for_each(|_i| {
-            input.iter_mut().for_each(|row| {
-                row.insert(*j + x, Entity::Space);
-            });
-            x += 1;
-        });
-    });
-
-    input
+    // Grab first argument (after binary) as file name and read into string
+    let contents: String = read_to_string(env::args().nth(1).unwrap()).unwrap();
+    
+    // Calculate the sum of shortest distances between all galaxies, instead of 
+    // replacing the space that is expanding we add onto it, so we subtract one
+    // from the expansion ratio as defined in the puzzle.
+    println!("Answer part one: {}", calculate(contents.clone(), 1));
+    println!("Answer part two: {}", calculate(contents.clone(), 999999));
 }
