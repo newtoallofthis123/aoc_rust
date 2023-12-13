@@ -41,7 +41,7 @@ fn get_winning(pair: (i64, i64)) -> i64 {
 
     // equation is -i^2 + time*i - record = 0
     // The i is the speed
-
+    
     let diff = (time.pow(2) as f32 - (4.0 * record as f32)).sqrt();
 
     let res = [(time as f32 + diff) / 2.0, (time as f32 - diff) / 2.0];

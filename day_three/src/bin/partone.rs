@@ -84,7 +84,7 @@ fn get_nums_in_line(grid: &BTreeMap<(i32, i32), Entry>, x: i32) -> Vec<(i32, Vec
             }
         }
     }
-
+    
     nums
 }
 

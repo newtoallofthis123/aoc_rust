@@ -14,11 +14,15 @@ I do not recommend you copy the exact answer, since it is different for everyone
 - [x] Day 2
 - [x] Day 3
 - [x] Day 4
-- [ ] Day 5
+- [ ] Day 5 (I)
 - [x] Day 6
 - [x] Day 7
 - [x] Day 8
 - [x] Day 9
+- [ ] Day 10
+- [ ] Day 11 (I)
+- [ ] Day 12
+- [x] Day 13
 
 ## License
 

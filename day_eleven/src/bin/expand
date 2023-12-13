@@ -1,0 +1,56 @@
+....#........
+.........#...
+#............
+.............
+.............
+........#....
+.#...........
+............#
+.............
+.............
+.........#...
+#....#.......
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        let full_input: Vec<Vec<Entity>> = include_str!("expand")
+            .lines()
+            .map(|l| {
+                l.chars()
+                    .map(|c| match c {
+                        '.' => Entity::Space,
+                        '#' => Entity::Galaxy,
+                        _ => panic!("Unknown entity"),
+                    })
+                    .collect::<Vec<_>>()
+            })
+            .collect::<Vec<_>>();
+
+        let input = include_str!("temp")
+        .lines()
+        .map(|l| {
+            l.chars()
+                .map(|c| match c {
+                    '.' => Entity::Space,
+                    '#' => Entity::Galaxy,
+                    _ => panic!("Unknown entity"),
+                })
+                .collect::<Vec<_>>()
+        })
+        .collect::<Vec<_>>();
+
+        let actual_import = return_full_input(input.clone());
+
+        for i in 0..full_input.len() {
+            for j in 0..full_input[0].len() {
+                println!("{} {}", i, j);
+                assert_eq!(full_input[i][j], actual_import[i][j]);
+            }
+        }
+    }
+}

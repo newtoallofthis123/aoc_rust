@@ -1,0 +1,33 @@
+ let mut paired = Vec::new();
+
+    let mut i = 0;
+    let mut same = Vec::new();
+
+    while i < machines.len() {
+        match machines[i] == Machine::Working {
+            true => {
+                if !same.is_empty() {
+                    paired.push(same.clone());
+                    same.clear();
+                }
+            }
+            false => same.push(machines[i]),
+        }
+        i += 1;
+    }
+    if !same.is_empty() {
+        paired.push(same.clone());
+        same.clear();
+    }
+    
+    println!("{:?}", (&paired, &records));
+
+    let mut total = 0;
+    for rec in records{
+        // remove anyone with all broken and the same length as rec
+        paired.retain(|x| {
+            x.len() != rec as usize || !x.iter().filter(|y| **y == Machine::Broken).count() == rec as usize -1
+        })
+    }
+
+    println!("{:?}", paired);
