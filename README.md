@@ -27,6 +27,8 @@ The whole point of Advent of Code is to learn and get better at programming. So 
 - [x] Day 11
 - [ ] Day 12
 - [x] Day 13
+- [x] Day 14
+- [x] Day 15
 
 ## Was able to solve with reference
 
@@ -39,6 +41,15 @@ These are usually problems for which I was able to solve part 1, but not part 2.
 These are problems that I copied off another answer, but I took the time to understand it and learn from it.
 
 - [x] Day 11 (Part 2)
+- [x] Day 14 (Part 2)
+
+## To be reviewed later
+
+These are problems that I was able to solve, but I feel like I could have done better. So I will be reviewing them later.
+
+- [ ] Day 8
+- [ ] Day 11
+- [ ] Day 14
 
 ## License
 
