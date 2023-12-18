@@ -29,12 +29,16 @@ The whole point of Advent of Code is to learn and get better at programming. So 
 - [x] Day 13
 - [x] Day 14
 - [x] Day 15
+- [x] Day 16
+- [x] Day 17
+- [x] Day 18
 
 ## Was able to solve with reference
 
 These are usually problems for which I was able to solve part 1, but not part 2. So I had to look at the answer to part 2, realize my mistake, and then solve it.
 
 - [x] Day 13 (Part 2)
+- [x] Day 16
 
 ## Understood and Copied the answer
 
@@ -42,6 +46,7 @@ These are problems that I copied off another answer, but I took the time to unde
 
 - [x] Day 11 (Part 2)
 - [x] Day 14 (Part 2)
+- [x] Day 17
 
 ## To be reviewed later
 
@@ -50,6 +55,12 @@ These are problems that I was able to solve, but I feel like I could have done b
 - [ ] Day 8
 - [ ] Day 11
 - [ ] Day 14
+
+## Concepts to be learned
+
+- [ ] Dijkstra's Algorithm
+- [ ] Min Max Algorithm
+- [ ] A* Algorithm
 
 ## License
 

@@ -1,53 +1,32 @@
-#[derive(Debug, Clone, Copy, PartialEq)]
-enum Machine {
-    Broken,
-    Working,
-    Unknown,
+fn main(){
+    let input = include_str!("temp").lines().map(|x| {
+        let t = x.split_whitespace().collect::<Vec<_>>();
+        let nums = t[1].split(',').map(|n| n.parse::<u8>().unwrap()).collect::<Vec<_>>();
+
+        (t[0], nums)
+    }).collect::<Vec<_>>();
+
+    let test = &input[0];
+    let (pattern, nums) = test.clone();
+
+    find_arrangements(pattern, nums);
 }
 
-fn main() {
-    let input = include_str!("temp")
-        .lines()
-        .map(|x| x.split(' ').collect::<Vec<&str>>())
-        .collect::<Vec<Vec<&str>>>();
+fn find_arrangements(pattern: &str, nums: Vec<u8>)->u16{
+    let mut queue = nums;
+    let mut arrangements = 0;
+    queue.sort();
+    let mut pattern: Vec<char> = pattern.chars().collect::<Vec<char>>();
 
-    let records = input
-        .iter()
-        .map(|x| {
-            x[1].split(',')
-                .map(|x| x.parse::<i32>().unwrap())
-                .collect::<Vec<i32>>()
-        })
-        .collect::<Vec<Vec<i32>>>();
-    let input = input
-        .iter()
-        .map(|x| {
-            x[0].chars()
-                .map(|y| match y {
-                    '?' => Machine::Unknown,
-                    '#' => Machine::Broken,
-                    '.' => Machine::Working,
-                    _ => panic!("Unknown machine type"),
-                })
-                .collect::<Vec<Machine>>()
-        })
-        .collect::<Vec<Vec<Machine>>>();
+    while let Some(num) = queue.pop(){
+        queue.sort();
 
-    let map = input
-        .iter()
-        .zip(records.iter())
-        .map(|(x, y)| (x.clone(), y.clone()))
-        .collect::<Vec<(Vec<Machine>, Vec<i32>)>>()
-        .to_vec();
+        let mut slice = Vec::new();
 
-    // println!("{:?}", map);
+        
 
-    let test = map[2].clone();
-    println!("{:?}", test);
-
-    arrange_broken(test.0, test.1);
-}
-
-fn arrange_broken(machines: Vec<Machine>, records: Vec<i32>) {
-    println!("{:?}", machines);  
+        println!("P: {:?}", pattern);
+        println!("S: {:?}", slice);
+    }
+    0
 }

@@ -27,26 +27,26 @@ fn main() {
     }
 
     let mut current = "AAA".to_string();
-    let Some(count) = instructions.iter().cycle().enumerate().find_map(
-        |(i, direction)| -> Option<usize> {
-            let neighbors = map.get(current.as_str()).expect("No neighbors").to_owned();
-            let next = match *direction {
-                'L' => {
-                    neighbors.0
+    let Some(count) =
+        instructions
+            .iter()
+            .cycle()
+            .enumerate()
+            .find_map(|(i, direction)| -> Option<usize> {
+                let neighbors = map.get(current.as_str()).expect("No neighbors").to_owned();
+                let next = match *direction {
+                    'L' => neighbors.0,
+                    'R' => neighbors.1,
+                    _ => panic!("wut?"),
+                };
+                if next == "ZZZ" {
+                    Some(i + 1)
+                } else {
+                    current = next;
+                    None
                 }
-                'R' => {
-                    neighbors.1
-                }
-                _ => panic!("wut?")
-            };
-            if next == "ZZZ"{
-                Some(i+1)
-            } else{
-                current = next;
-                None
-            }
-        }
-    ) else {
+            })
+    else {
         panic!("No path found")
     };
 
